@@ -1,1 +1,21 @@
-<p>new-or-edit-task-dialog works!</p>
+<h2 mat-dialog-title>{{ addOrEdit }} Tarea</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill" class="dialog">
+      <mat-label>Nombre de la tarea</mat-label>
+      <input matInput formControlName="taskName" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="dialog">
+      <mat-label>Descripcion</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" class="me-2" (click)="confirm()">
+    {{ addOrEdit }} tarea
+  </button>
+  <button mat-raised-button color="warn" class="me-2" mat-dialog-close>
+    Volver al listado
+  </button>
+</div>

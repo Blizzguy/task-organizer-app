@@ -1,1 +1,29 @@
 
+@if(searchForm){
+  <form [formGroup]="searchForm" class="form-body mb-5">
+  
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Nombre de la tarea</mat-label>
+        <input matInput formControlName="taskName" />
+      </mat-form-field>
+    </div>
+  
+    <div class="top-border pt-3">
+      <button mat-raised-button color="primary" class="me-2" (click)="search()">
+        Filtrar resultados
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="me-2"
+        (click)="setSearchFormDefaultValues()"
+      >
+        Limpiar formulario
+      </button>
+      <button mat-raised-button color="accent" (click)="addHero()">
+        Nueva Tarea
+      </button>
+    </div>
+  </form>
+}

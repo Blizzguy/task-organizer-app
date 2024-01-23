@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TaskParams } from 'src/app/interfaces/task-params';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-filter-form',
   templateUrl: './filter-form.component.html',
   standalone: true,
-  styleUrls: ['./filter-form.component.scss'],
+  imports: [MatFormFieldModule, ReactiveFormsModule]
 })
 export class FilterFormComponent {
   @Output() addNewTask: EventEmitter<any> = new EventEmitter<any>();

@@ -1,1 +1,15 @@
-<p>delete-dialog works!</p>
+<h2 mat-dialog-title>Borrar Tarea</h2>
+<mat-dialog-content class="custom-dialog">
+  <p>¿Estás seguro de que quieres borrar la tarea "{{ task }}"?</p>
+  <p>Esta acción no se puede deshacer.</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="col-12">
+    <button mat-raised-button color="warn" class="me-2" (click)="confirm()">
+      Borrar
+    </button>
+    <button mat-raised-button color="primary" class="me-2" mat-dialog-close>
+      Volver al listado
+    </button>
+  </div>
+</mat-dialog-actions>
