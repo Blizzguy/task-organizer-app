@@ -64,8 +64,9 @@ export class TaskService {
     const index = taskList.findIndex(
       (task: Task) => task.id === taskToUpdate.id
     );
-    taskList[index] = taskToUpdate;
-    return taskList;
+    let taskListCopy = [...taskList];
+    taskListCopy[index] = taskToUpdate;
+    return taskListCopy;
   }
 
   add(
@@ -76,8 +77,9 @@ export class TaskService {
       taskList.length > 0
         ? Math.max(...taskList.map((task) => task.id), 0) + 1
         : 1;
-    taskToAdd.id = currentId;
-    taskList.push(taskToAdd);
-    return taskList;
+    let taskToAddCopy = { ...taskToAdd, id: currentId };
+    let taskListCopy = [...taskList];
+    taskListCopy.push(taskToAddCopy);
+    return taskListCopy;
   }
 }
