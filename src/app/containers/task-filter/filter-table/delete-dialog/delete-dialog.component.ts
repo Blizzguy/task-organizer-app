@@ -4,8 +4,6 @@ import { MatModule } from 'src/app/modules/material.module';
 
 @Component({
   selector: 'app-delete-dialog',
-  standalone: true,
-  imports: [MatModule],
   templateUrl: './delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.scss']
 })

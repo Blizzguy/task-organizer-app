@@ -3,18 +3,28 @@ import { Task } from '../interfaces/task';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TaskParams } from '../interfaces/task-params';
+import { Store } from '@ngrx/store';
+import { AppState } from '../interfaces/app.state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private readonly store: Store<AppState>) {}
 
   readonly apiUrl = 'http://localhost:3000';
 
   search(): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.apiUrl}/response`);
+  }
+
+  prefilter(params: TaskParams): Task[] {
+    let filteredTasks: Task[] = [];
+    this.store.select(state => state.tasks).subscribe(tasks => {
+      filteredTasks = this.filter(params, tasks);
+    });
+    return filteredTasks;
   }
 
   filter(

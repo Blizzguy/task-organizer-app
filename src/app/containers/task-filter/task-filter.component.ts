@@ -1,40 +1,42 @@
-import { Component, OnInit, Self } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FilterFormComponent } from './filter-form/filter-form.component';
 import { TaskParams } from 'src/app/interfaces/task-params';
 import { DeleteDialogComponent } from './filter-table/delete-dialog/delete-dialog.component';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/interfaces/task';
 import { NewOrEditTaskDialogComponent } from './new-or-edit-task-dialog/new-or-edit-task-dialog.component';
-import { FilterTableComponent } from './filter-table/filter-table.component';
-import { MatModule } from 'src/app/modules/material.module';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from 'src/app/interfaces/app.state';
+import { loadTasks } from 'src/app/storage/task.actions';
 
 
 @Component({
   selector: 'app-task-filter',
   templateUrl: './task-filter.component.html',
-  standalone: true,
-  imports: [FilterFormComponent, FilterTableComponent, NewOrEditTaskDialogComponent, DeleteDialogComponent, MatModule],
-  providers: [TaskService, MatDialog],
   styleUrls: ['./task-filter.component.scss']
 })
 export class TaskFilterComponent implements OnInit {
 
   constructor(
     private readonly taskService: TaskService,
-    private readonly dialog: MatDialog
+    private readonly store: Store<AppState>,
+    public dialog: MatDialog
   ) {}
 
   taskList: Task[];
   baseTaskList: Task[];
 
+
   ngOnInit(): void {
     this.taskService
       .search()
-      .subscribe((superheroList: Task[]) => {
-        this.taskList = superheroList;
-        this.baseTaskList = superheroList;
+      .subscribe((taskList: Task[]) => {
+        this.taskList = taskList;
+        this.baseTaskList = taskList;
+        this.store.dispatch(loadTasks({ tasks: this.taskList }));
       });
+ 
   }
 
   addOrEdit(listId?: number): void {
@@ -42,11 +44,11 @@ export class TaskFilterComponent implements OnInit {
   }
 
   updateTask(taskId: number): void {
-    const hero = this.taskList.find(
+    const task = this.taskList.find(
       (task: Task) => task.id === taskId
     );
     const dialogRef = this.dialog.open(NewOrEditTaskDialogComponent, {
-      data: { ...hero, isNew: false },
+      data: { ...task, isNew: false },
     });
 
     dialogRef.afterClosed().subscribe((result: Task) => {
@@ -92,9 +94,9 @@ export class TaskFilterComponent implements OnInit {
     });
   }
 
-  filterSuperheroes(taskParams: TaskParams): void {
+  filterTasks(taskParams: TaskParams): void {
     this.taskList = [
-      ...this.taskService.filter(taskParams, this.baseTaskList),
+      ...this.taskService.prefilter(taskParams),
     ];
   }
 

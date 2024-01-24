@@ -1,7 +1,7 @@
 <div class="container mt-4">
     <app-filter-form
-      (updateSearchForm)="filterSuperheroes($event)"
-      (addNewHero)="addOrEdit()"
+      (updateSearchForm)="filterTasks($event)"
+      (addNewTask)="addOrEdit()"
     ></app-filter-form>
     @if (taskList) {
     <app-filter-table

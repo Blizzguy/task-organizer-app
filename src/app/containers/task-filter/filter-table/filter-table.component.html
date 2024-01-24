@@ -1,42 +1,48 @@
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="taskName">
-        <th mat-header-cell *matHeaderCellDef>Nombre civil</th>
-        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
-      </ng-container>
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Nombre superhéroe</th>
-        <td mat-cell *matCellDef="let row">{{ row.superheroName }}</td>
-      </ng-container>
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let element">
-          <button
-            mat-icon-button
-            (click)="delete(element.id)"
-            class="text-danger"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-          <button mat-icon-button
-          (click)="edit(element.id)">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">SuperHeroe no encontrado</td>
-      </tr>
-    </table>
-  
-    <mat-paginator
-      [length]="dataSource.data.length"
-      [pageSize]="5"
-      [pageSizeOptions]="[5, 10, 25, 100]"
-      aria-label="Pagina de heroe"
-    ></mat-paginator>
-  </div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="taskName">
+      <th mat-header-cell *matHeaderCellDef>Nombre de la tarea</th>
+      <td mat-cell *matCellDef="let row">{{ row.taskName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+      <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let element">
+        @if (!element.completed) {
+        <button
+          mat-icon-button
+          (click)="delete(element.id)"
+          class="text-danger"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="edit(element.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="completeTask(element)">
+          <mat-icon>check</mat-icon>
+        </button>
+        } @else {
+          <p>Tarea completada</p>
+        }
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row [ngClass]="{'completed-task': row.completed}" *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Tarea no encontrada</td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Pagina de tareas"
+  ></mat-paginator>
+</div>

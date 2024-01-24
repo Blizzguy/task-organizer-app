@@ -4,7 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatModule } from './modules/material.module';
+import { TaskService } from './services/task.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,10 @@ import { MatModule } from './modules/material.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatModule
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
   ],
-  providers: [],
+  providers: [TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

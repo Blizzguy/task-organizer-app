@@ -10,13 +10,9 @@ import {
 import { Task } from 'src/app/interfaces/task';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatModule } from 'src/app/modules/material.module';
 
 @Component({
   selector: 'app-filter-table',
-  standalone: true,
-  imports: [MatModule],
-  providers: [MatTableDataSource],
   templateUrl: './filter-table.component.html',
   styleUrls: ['./filter-table.component.scss']
 })
@@ -32,8 +28,7 @@ export class FilterTableComponent implements AfterViewInit, OnChanges {
 
   pageSize: number;
   length: number;
-  displayedColumns: string[] = ['taskName', 'description'];
-
+  displayedColumns: string[] = ['taskName', 'description', 'actions'];
   constructor() {}
 
   delete(id: number): void {
@@ -59,6 +54,12 @@ export class FilterTableComponent implements AfterViewInit, OnChanges {
       this.dataSource.paginator = this.paginator;
     }
     
+  }
+
+  completeTask(task: Task): void {
+    let tasked = { ...task, completed: true };
+    this.taskList = this.taskList.map(t => t.id === tasked.id ? tasked : t);
+    this.dataSource.data = [...this.taskList];
   }
 
 }
