@@ -1,14 +1,14 @@
 <div class="container mt-4">
-    <app-filter-form
-      (updateSearchForm)="filterTasks($event)"
-      (addNewTask)="addOrEdit()"
-    ></app-filter-form>
-    @if (taskList) {
-    <app-filter-table
-      [taskList]="taskList"
-      (editTask)="addOrEdit($event)"
-      (deleteTask)="deleteTask($event)"
-    >
-    </app-filter-table>
-    }
+  <app-filter-form
+    (updateSearchForm)="filterTasks($event)"
+    (addNewTask)="addOrEdit()"
+  ></app-filter-form>
+  @if (taskList) {
+  <app-filter-table
+    [taskList]="taskList"
+    (editTask)="addOrEdit($event)"
+    (deleteTask)="deleteTask($event)"
+  >
+  </app-filter-table>
+  }
 </div>

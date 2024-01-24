@@ -16,8 +16,8 @@ describe('FilterFormComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         NoopAnimationsModule,
-        ReactiveFormsModule
-      ]
+        ReactiveFormsModule,
+      ],
     });
     fixture = TestBed.createComponent(FilterFormComponent);
     component = fixture.componentInstance;

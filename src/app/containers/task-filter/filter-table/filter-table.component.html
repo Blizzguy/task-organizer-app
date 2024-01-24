@@ -26,13 +26,17 @@
           <mat-icon>check</mat-icon>
         </button>
         } @else {
-          <p>Tarea completada</p>
+        <p>Tarea completada</p>
         }
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row [ngClass]="{'completed-task': row.completed}" *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      mat-row
+      [ngClass]="{ 'completed-task': row.completed }"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">Tarea no encontrada</td>

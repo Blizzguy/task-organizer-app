@@ -1,11 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog.component';
 
 describe('DeleteDialogComponent', () => {
   let component: DeleteDialogComponent;
   let fixture: ComponentFixture<DeleteDialogComponent>;
-  let mockDialogRef: { close: any; };
+  let mockDialogRef: { close: any };
 
   beforeEach(() => {
     mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -16,7 +20,7 @@ describe('DeleteDialogComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_DIALOG_DATA, useValue: 'Test task' },
-      ]
+      ],
     });
 
     fixture = TestBed.createComponent(DeleteDialogComponent);

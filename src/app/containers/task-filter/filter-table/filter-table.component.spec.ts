@@ -12,11 +12,7 @@ describe('FilterTableComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FilterTableComponent],
-      imports: [
-        MatPaginatorModule,
-        MatTableModule,
-        NoopAnimationsModule
-      ]
+      imports: [MatPaginatorModule, MatTableModule, NoopAnimationsModule],
     });
     fixture = TestBed.createComponent(FilterTableComponent);
     component = fixture.componentInstance;
@@ -41,13 +37,27 @@ describe('FilterTableComponent', () => {
   });
 
   it('should set dataSource when setTable is called', () => {
-    component.taskList = [{ id: 1, taskName: 'Test', description: 'Test description', completed: false }];
+    component.taskList = [
+      {
+        id: 1,
+        taskName: 'Test',
+        description: 'Test description',
+        completed: false,
+      },
+    ];
     component.setTable();
     expect(component.dataSource.data).toEqual(component.taskList);
   });
 
   it('should update taskList when ngOnChanges is called', () => {
-    const newTaskList: Task[] = [{ id: 1, taskName: 'Test', description: 'Test description', completed: false }];
+    const newTaskList: Task[] = [
+      {
+        id: 1,
+        taskName: 'Test',
+        description: 'Test description',
+        completed: false,
+      },
+    ];
     component.taskList = newTaskList;
     component.ngOnChanges();
     expect(component.dataSource.data).toEqual(newTaskList);

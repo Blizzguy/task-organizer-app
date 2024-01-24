@@ -2,10 +2,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TaskParams } from 'src/app/interfaces/task-params';
 
-
 @Component({
   selector: 'app-filter-form',
-  templateUrl: './filter-form.component.html'
+  templateUrl: './filter-form.component.html',
 })
 export class FilterFormComponent {
   @Output() addNewTask: EventEmitter<any> = new EventEmitter<any>();

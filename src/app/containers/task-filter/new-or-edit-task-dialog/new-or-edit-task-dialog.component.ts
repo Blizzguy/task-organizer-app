@@ -1,15 +1,19 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from 'src/app/interfaces/task';
 
 @Component({
   selector: 'app-new-or-edit-task-dialog',
   templateUrl: './new-or-edit-task-dialog.component.html',
-  styleUrls: ['./new-or-edit-task-dialog.component.scss']
+  styleUrls: ['./new-or-edit-task-dialog.component.scss'],
 })
 export class NewOrEditTaskDialogComponent {
-
   addOrEdit: string;
 
   form: FormGroup;
@@ -43,5 +47,4 @@ export class NewOrEditTaskDialogComponent {
       this.dialogRef.close(formValue);
     }
   }
-
 }

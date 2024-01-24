@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TaskService } from './task.service';
-import { StoreModule } from '@ngrx/store'; // Importa StoreModule
+import { StoreModule } from '@ngrx/store';
 import { Task } from '../interfaces/task';
 
 describe('TaskService', () => {
@@ -9,10 +9,7 @@ describe('TaskService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        StoreModule.forRoot({}), // Añade esto
-      ],
+      imports: [HttpClientTestingModule, StoreModule.forRoot({})],
     });
     service = TestBed.inject(TaskService);
   });
@@ -29,7 +26,7 @@ describe('TaskService', () => {
 
   it('should delete a task', () => {
     const taskList: Task[] = [
-      { id: 1, taskName: 'Task 1', completed: false},
+      { id: 1, taskName: 'Task 1', completed: false },
       { id: 2, taskName: 'Task 2', completed: false },
       { id: 3, taskName: 'Task 3', completed: false },
     ];
@@ -38,12 +35,12 @@ describe('TaskService', () => {
     const updatedTaskList = service.delete(taskId, taskList);
 
     expect(updatedTaskList.length).toBe(taskList.length - 1);
-    expect(updatedTaskList.find(task => task.id === taskId)).toBeUndefined();
+    expect(updatedTaskList.find((task) => task.id === taskId)).toBeUndefined();
   });
 
   it('should add a task', () => {
     const taskList: Task[] = [
-      { id: 1, taskName: 'Task 1', completed: false},
+      { id: 1, taskName: 'Task 1', completed: false },
       { id: 2, taskName: 'Task 2', completed: false },
     ];
     const newTask: Task = { id: 3, taskName: 'Task 3', completed: false };
@@ -51,8 +48,8 @@ describe('TaskService', () => {
     const updatedTaskList = service.add(newTask, taskList);
 
     expect(updatedTaskList.length).toBe(taskList.length);
-    expect(updatedTaskList.find(task => task.id === newTask.id)).toBeDefined();
+    expect(
+      updatedTaskList.find((task) => task.id === newTask.id)
+    ).toBeDefined();
   });
-
-  
 });

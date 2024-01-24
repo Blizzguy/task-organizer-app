@@ -14,10 +14,9 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-filter-table',
   templateUrl: './filter-table.component.html',
-  styleUrls: ['./filter-table.component.scss']
+  styleUrls: ['./filter-table.component.scss'],
 })
 export class FilterTableComponent implements AfterViewInit, OnChanges {
-
   @Input() taskList: Task[];
   @Output() deleteTask: EventEmitter<number> = new EventEmitter<number>();
   @Output() editTask: EventEmitter<number> = new EventEmitter<number>();
@@ -53,13 +52,11 @@ export class FilterTableComponent implements AfterViewInit, OnChanges {
       this.length = this.taskList.length;
       this.dataSource.paginator = this.paginator;
     }
-    
   }
 
   completeTask(task: Task): void {
     let tasked = { ...task, completed: true };
-    this.taskList = this.taskList.map(t => t.id === tasked.id ? tasked : t);
+    this.taskList = this.taskList.map((t) => (t.id === tasked.id ? tasked : t));
     this.dataSource.data = [...this.taskList];
   }
-
 }

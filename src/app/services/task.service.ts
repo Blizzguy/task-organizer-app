@@ -7,11 +7,13 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../interfaces/app.state';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
-
-  constructor(private readonly http: HttpClient, private readonly store: Store<AppState>) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly store: Store<AppState>
+  ) {}
 
   readonly apiUrl = 'http://localhost:3000';
 
@@ -21,16 +23,15 @@ export class TaskService {
 
   prefilter(params: TaskParams): Task[] {
     let filteredTasks: Task[] = [];
-    this.store.select(state => state.tasks).subscribe(tasks => {
-      filteredTasks = this.filter(params, tasks);
-    });
+    this.store
+      .select((state) => state.tasks)
+      .subscribe((tasks) => {
+        filteredTasks = this.filter(params, tasks);
+      });
     return filteredTasks;
   }
 
-  filter(
-    params: TaskParams,
-    taskList: Task[]
-  ): Task[] {
+  filter(params: TaskParams, taskList: Task[]): Task[] {
     let filteredList: Task[] = [];
 
     if (params.taskName && params.taskName !== '') {
@@ -47,20 +48,12 @@ export class TaskService {
 
     return filteredList;
   }
-  
-  delete(
-    id: number,
-    taskList: Task[]
-  ): Task[] {
-    return taskList.filter(
-      (task: Task) => task.id !== id
-    );
+
+  delete(id: number, taskList: Task[]): Task[] {
+    return taskList.filter((task: Task) => task.id !== id);
   }
 
-  update(
-    taskToUpdate: Task,
-    taskList: Task[]
-  ): Task[] {
+  update(taskToUpdate: Task, taskList: Task[]): Task[] {
     const index = taskList.findIndex(
       (task: Task) => task.id === taskToUpdate.id
     );
@@ -69,10 +62,7 @@ export class TaskService {
     return taskListCopy;
   }
 
-  add(
-    taskToAdd: Task,
-    taskList: Task[]
-  ): Task[] {
+  add(taskToAdd: Task, taskList: Task[]): Task[] {
     let currentId =
       taskList.length > 0
         ? Math.max(...taskList.map((task) => task.id), 0) + 1
